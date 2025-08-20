@@ -99,6 +99,9 @@
   z-index: 2;
 }
 
+/* Лёгкий сдвиг вверх-вправо (чуть больше) для точного центра */
+.music-btn .icon { display:inline-block; transform: translate(2px, -2px); }
+
 .circle-text {
   width: 200px;
   height: 200px;
@@ -106,7 +109,7 @@
 }
 
 .circle-text text {
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: 2px;
   fill: var(--dark);
   text-transform: uppercase;
@@ -343,10 +346,15 @@ td {
 }
 
 .number span {
-  display: block;
+  display: inline-block;
   font-size: 24px;
   line-height: 1;
-  transition: all 0.3s ease;
+  /* Без анимации, фиксированная метрика цифр */
+  transition: none;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  min-width: 2ch;         /* фиксируем ширину: 00 */
+  text-align: center;
 }
 
 .dot span {
@@ -407,7 +415,7 @@ td {
     </defs>
     <text>
       <textPath href="#circlePathInner" startOffset="0%">
-        МУЗЫКАНЫ ҚОСУ • МУЗЫКАНЫ ҚОСУ • МУЗЫКАНЫ ҚОСУ •
+        МУЗЫКАНЫ ҚОСУ • МУЗЫКАНЫ ҚОСУ • 
       </textPath>
     </text>
   </svg>
@@ -450,8 +458,8 @@ td {
   <!-- 5. Адрес -->
   <section class="reveal address">
     <h3>мекен-жайымыз</h3>
-    <div class="hall">Grand Hall</div>
-    <div class="addr">Ақтөбе қаласы, Сәңкібай батыр көшесі, 261</div>
+    <div class="hall">Assado</div>
+    <div class="addr">Ақтөбе қаласы, Проспект Тауелсиздик, 9Б</div>
     <div style="text-align:center">
       <button class="map-btn" onclick="window.open('https://go.2gis.com/O9DPT')">
          <b>Картаны ашу</b>
@@ -518,6 +526,10 @@ td {
   function renderCalendar(year, month, activeDay){
     // month: 0-11
     const grid = document.getElementById('calGrid');
+    if(!grid){
+      // Если сетки нет в разметке, выходим без ошибок
+      return;
+    }
     grid.innerHTML = '';
     const d = new Date(year, month, 1);
     const startDay = (d.getDay() + 8) % 7; // сделать ПН=0
@@ -547,7 +559,9 @@ td {
       }
     }
   }
-  renderCalendar(2025, 7, 30); // август=8
+  if (document.getElementById('calGrid')) {
+    renderCalendar(2025, 7, 30); // август=8
+  }
 
   /* ===== Музыка: кнопка под фото + плавающий тоггл ===== */
 document.addEventListener('DOMContentLoaded', () => {
@@ -559,13 +573,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (music.paused) {
       try {
         await music.play();        // запуск музыки
-        icon.textContent = '⏸';   // меняем на паузу
+        icon.textContent = '\u23F8';   // меняем на паузу
+        icon.style.transform = 'translate(1px, -2px)'; // пауза: слегка вправо и выше
       } catch(e) {
         alert('Қолмен қосу керек: жүйе бұғаттады.');
       }
     } else {
       music.pause();               // пауза
       icon.textContent = '▶';     // возвращаем ▶
+      icon.style.transform = 'translate(2px, -2px)'; // треугольник: немного вправо и выше
     }
   });
 });
@@ -592,12 +608,9 @@ function tick() {
 
 function updateNumber(id, value){
   const el = document.getElementById(id);
-  if(el.textContent !== value){
-    el.style.transform = 'translateY(-100%)';
-    setTimeout(() => {
-      el.textContent = value;
-      el.style.transform = 'translateY(0)';
-    }, 150);
+  if(el && el.textContent !== value){
+    // Меняем текст без анимации, чтобы цифры не "прыгали"
+    el.textContent = value;
   }
 }
 
