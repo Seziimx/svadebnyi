@@ -388,9 +388,6 @@ td {
 </head>
 <body>
 
-<!-- Аудио -->
-<audio id="bgMusic" src="music.mp3"></audio>
-
 <!-- Плавающий тоггл -->
 <div class="float-audio" id="floatAudio" style="display:none">
   <button id="muteBtn" aria-label="Mute/Unmute">🔊</button>
@@ -405,8 +402,8 @@ td {
   </div>
   
  <!-- Музыка -->
-<audio id="bgMusic" preload="auto" loop>
-  <source src="Song1.mp3">
+<audio id="bgMusic" preload="auto" loop controls>
+  <source src="Song1.mp3" type="audio/mpeg">
 </audio>
 
 <div class="circle-music">
