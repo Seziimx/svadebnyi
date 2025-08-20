@@ -377,8 +377,11 @@ td {
   .brand{color:var(--gold);font-weight:700;letter-spacing:.2em;text-align:center;margin:12px 0 0}
 
   /* Плавные появления */
-  .reveal{opacity:0;transform:translateY(16px);transition:.6s ease}
-  .reveal.show{opacity:1;transform:none}
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease, transform .7s ease}
+  .reveal.show{opacity:1;transform:translateY(0)}
+  /* Вариант с лёгким увеличением */
+  .reveal-zoom{transform:translateY(30px) scale(.96)}
+  .reveal-zoom.show{transform:translateY(0) scale(1)}
 </style>
 </head>
 <body>
@@ -390,9 +393,9 @@ td {
 
 <!-- Блок с фото + музыка -->
 <section class="reveal">
-  <div class="date-soft">30.08.2025</div>
-  <div class="names">Азамат &nbsp; Нaзім</div>
-  <div class="hero-photo">
+  <div class="date-soft reveal reveal-zoom">30.08.2025</div>
+  <div class="names reveal reveal-zoom">Азамат &nbsp; Нaзім</div>
+  <div class="hero-photo reveal reveal-zoom">
     <img src="jjj.jfif" alt="Жұптың фотосы">
   </div>
   
@@ -401,7 +404,7 @@ td {
   <source src="Song1.mp3" type="audio/mpeg">
 </audio>
 
-<div class="circle-music">
+<div class="circle-music reveal-zoom">
   <!-- кнопка play/pause -->
   <button class="music-btn" id="playMusic">
     <span class="icon">▶</span>
@@ -482,7 +485,7 @@ td {
 
 
   <!-- 7. Отсчёт -->
-<section class="reveal countdown">
+<section class="reveal reveal-zoom countdown">
   <h3>Тойымызға дейін</h3>
   <div class="dots">
     <div class="dot">
@@ -514,10 +517,14 @@ td {
 </main>
 
 <script>
-  /* ===== Scroll-reveal ===== */
+  /* ===== Scroll-reveal (в обе стороны) ===== */
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+      if (e.isIntersecting){
+        e.target.classList.add('show');
+      } else {
+        e.target.classList.remove('show');
+      }
     });
   }, {threshold:.16});
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
@@ -636,6 +643,5 @@ setInterval(tick, 1000);
 </script>
 </body>
 </html>
-
 
 
