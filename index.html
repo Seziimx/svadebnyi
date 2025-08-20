@@ -406,7 +406,7 @@ td {
   
  <!-- Музыка -->
 <audio id="bgMusic" preload="auto" loop>
-  <source src="Song1.mp3" type="audio/mpeg">
+  <source src="Song1.mp3">
 </audio>
 
 <div class="circle-music">
@@ -566,30 +566,26 @@ td {
   renderCalendar(2025, 7, 30); // август=8
 
   /* ===== Музыка: кнопка под фото + плавающий тоггл ===== */
-const music = document.getElementById('bgMusic');
-const playBtn = document.getElementById('playMusic');
-const icon = playBtn.querySelector('.icon');
+document.addEventListener('DOMContentLoaded', () => {
+  const music = document.getElementById('bgMusic');
+  const playBtn = document.getElementById('playMusic');
+  const icon = playBtn.querySelector('.icon');
 
-playBtn.addEventListener('click', async () => {
-  if(music.paused){
-    try{
-      await music.play();
-      icon.textContent = '⏸'; // пауза
-    }catch(e){
-      alert('Қолмен қосу керек: жүйе бұғаттады.');
+  playBtn.addEventListener('click', async () => {
+    if (music.paused) {
+      try {
+        await music.play();        // запускаем музыку
+        icon.textContent = '⏸';   // меняем на паузу
+      } catch(e) {
+        alert('Қолмен қосу керек: жүйе бұғаттады.');
+      }
+    } else {
+      music.pause();               // ставим на паузу
+      icon.textContent = '▶';     // меняем обратно на ▶
     }
-  } else {
-    music.pause();
-    icon.textContent = '▶'; // play
-  }
+  });
 });
-
-
-muteBtn.addEventListener('click', ()=>{
-  music.muted = !music.muted;
-  setIcon();
-});
-
+</script>
 
 // Цель: 30 августа 2025, 18:00 Актобе (UTC+5)
 const target = new Date('2025-08-30T18:00:00+05:00').getTime();
@@ -627,3 +623,4 @@ setInterval(tick, 1000);
 </script>
 </body>
 </html>
+
