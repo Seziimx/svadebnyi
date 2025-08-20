@@ -568,10 +568,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const music = document.getElementById('bgMusic');
   const playBtn = document.getElementById('playMusic');
   const icon = playBtn.querySelector('.icon');
+  const START_AT = 20; // seconds
+
+  // Установим стартовую позицию 00:20, когда будут известны метаданные
+  const setStartIfPossible = () => {
+    if (!isNaN(music.duration) && music.duration > START_AT && music.currentTime < 1) {
+      music.currentTime = START_AT;
+    }
+  };
+  if (music.readyState >= 1) {
+    setStartIfPossible();
+  } else {
+    music.addEventListener('loadedmetadata', setStartIfPossible, { once: true });
+  }
 
   playBtn.addEventListener('click', async () => {
     if (music.paused) {
       try {
+        // Перед запуском убедимся, что стартуем с 00:20
+        setStartIfPossible();
         await music.play();        // запуск музыки
         icon.textContent = '\u23F8';   // меняем на паузу
         icon.style.transform = 'translate(1px, -2px)'; // пауза: слегка вправо и выше
@@ -621,5 +636,6 @@ setInterval(tick, 1000);
 </script>
 </body>
 </html>
+
 
 
