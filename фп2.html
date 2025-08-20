@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Сайт шақыру — Азамат & Назым</title>
+
+<!-- Шрифты -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cormorant+Garamond:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#f6f3ee;
+    --card:#ffffff;
+    --ink:#2b2b2b;
+    --muted:#9aa0a6;
+    --gold:#b08d57;  /* благородный акцент */
+    --dark:#1f2123;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Playfair Display", serif;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;   
+  }
+
+  /* Каркас */
+  .phone{
+    max-width: 430px;      /* мобильный макет */
+    margin: 0 auto;
+    background: var(--card);
+    min-height: 100svh;
+    box-shadow: 0 8px 40px rgba(25,25,25,.06);
+  }
+  section{
+    padding: 28px 20px;
+    border-bottom: 1px solid #eee8;
+  }
+
+  /* Заголовочная часть */
+  .date-soft{
+    color:#d9d3c8;
+    letter-spacing:.25em;
+    font-weight:600;
+    text-align:center;
+    margin: 6px 0 10px;
+  }
+  .names{
+    font-family:"Great Vibes", cursive;
+    font-size: 38px;
+    line-height: 1;
+    text-align:center;
+    color:var(--dark);
+    margin: 6px 0 14px;
+  }
+  .hero-photo{
+    width:100%;
+    max-width: 360px;
+    margin:0 auto;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  }
+  .hero-photo img{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+
+  /* Кнопка музыки под фото */
+.circle-music {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: -95px auto 30px; /* поднял вверх на 40px */
+}
+
+.music-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--gold);
+  border: none;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 2;
+}
+
+.circle-text {
+  width: 200px;
+  height: 200px;
+  animation: spin 10s linear infinite; /* вращение текста */
+}
+
+.circle-text text {
+  font-size: 14px;
+  letter-spacing: 2px;
+  fill: var(--dark);
+  text-transform: uppercase;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
+  /* Плавающий тоггл звука */
+  .float-audio{
+    position:fixed;
+    top:14px;
+    right:14px;
+    z-index:20;
+    display:none;
+  }
+  .float-audio button{
+    width:44px;height:44px;border-radius:50%;
+    border:none;cursor:pointer;
+    background:var(--card);
+    box-shadow:0 6px 20px rgba(0,0,0,.12);
+    font-size:18px;
+  }
+
+  /* Цитата */
+  .quote{
+    font-family:"Cormorant Garamond", serif;
+    font-style:italic;
+    text-align:center;
+    color:#6a6864;
+    max-width:320px;
+    margin:0 auto;
+  }
+
+  /* Текст-приглашение */
+.intro {
+  font-family: "Montserrat", serif;
+}
+ .intro h3 {
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: 23px;
+  color: #6a6864;
+  margin: 0 0 25px;
+  text-align: center;
+}
+
+.intro p {
+  margin: 0 auto;
+  max-width: 360px;
+  line-height: 1.7;
+  font-size: 16px;
+  text-align: center; /* добавляем */
+}
+.intro p b {
+  color: #b08d57; /* золотой цвет для имен */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2); /* лёгкая тень */
+}
+
+
+  /* Календарь — круглая карточка */
+.calendar-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.calendar-wrapper {
+  background: #000000;
+  color: #fff;
+  padding: 40px 20px;       /* отступы сверху/снизу и слева/справа */
+  border-radius: 50% / 30%; /* овал */
+  display: inline-flex;      /* размер под содержимое */
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  font-size: 18px;
+}
+
+/* Заголовок */
+.calendar-title {
+  font-family:"Great Vibes", cursive;
+    font-size: 38px;
+    line-height: 1;
+    text-align:center;
+    margin: 6px 0 14px;
+    color: var(--gold);
+}
+
+/* Таблица */
+table {
+  border-collapse: collapse;
+}
+
+td {
+  padding: 8px 10px;
+  font-size: 18px;
+  position: relative;
+}
+
+
+
+ /* Дата свадьбы — 30 августа */
+ .wedding-date {
+  color: #ff6f91;
+  font-weight: bold;
+}
+
+.wedding-date::after {
+  content: "❤️";
+  font-size: 16px;
+  position: absolute;
+  top: -5px;
+  right: -8px;
+}
+
+  /* Адрес */
+  .address h3{
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:14px;color:#6a6864;margin:0 0 10px;text-align:center;
+  }
+  .hall{
+    font-family:"Great Vibes", cursive;
+    font-size:30px;text-align:center;margin:0 0 8px;color:var(--dark);
+  }
+  .addr{
+    text-align:center;font-size:15px;color:#63625e;margin-bottom:14px;
+  }
+.map-btn{
+  display:inline-block;
+  border:none;
+  cursor:pointer;
+  background:var(--dark);
+  color:#fff;
+  border-radius:25px;          /* более округлые углы */
+  padding:10px 20px;           /* чуть больше пространства для кнопки */
+  font-size:14px;
+  font-family: "Montserrat", serif;
+  letter-spacing:.04em;
+  box-shadow:0 8px 22px rgba(0,0,0,.22);
+  transition: all 0.3s ease;   /* плавное наведение */
+}
+.map-btn b {
+  color: #b08d57;            /* золотой цвет для текста */
+}
+
+.map-btn:hover{
+  background:#444;             /* тёмнее при наведении */
+  transform: translateY(-2px);
+}
+
+/* Таймлайн */
+.timeline {
+  margin: 20px auto;       /* отступ сверху и авто центр */
+  max-width: 360px;
+  position: relative;
+}
+
+.tl {
+  position: relative;
+  padding-left: 26px;      /* отступ для линии */
+}
+
+.tl::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #e7e2d8;
+}
+
+.item {
+  position: relative;
+  margin: 14px 0;
+  font-size: 16px;
+  padding-left: 30px;      /* увеличиваем, чтобы текст не налезал на точку */
+  line-height: 24px;        /* задаём фиксированную высоту строки для выравнивания */
+}
+
+.item::before {
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #d6d0c6;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+
+.time {
+  font-weight: 700;
+  margin-right: 6px;
+}
+
+
+  /* Обратный отсчёт */
+ .countdown {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.countdown h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 16px;
+  color: var(--dark);
+  margin-bottom: 20px;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.dot {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  color: #fff;
+  font-weight: 700;
+  transition: transform 0.3s ease;
+}
+
+.dot:hover {
+  transform: scale(1.05);
+}
+
+.number span {
+  display: block;
+  font-size: 24px;
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+
+.dot span {
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+
+  /* Той иелері */
+  .owners h3{
+    text-transform:uppercase;letter-spacing:.14em;
+    font-size:14px;color:#6a6864;margin:0 0 8px;text-align:center;
+  }
+  .owners p{margin:0 auto;max-width:360px;font-size:16px;text-align:center}
+
+  /* Мелкая типографика */
+  h2{font-size:22px;margin:0 0 12px;text-align:center}
+  .brand{color:var(--gold);font-weight:700;letter-spacing:.2em;text-align:center;margin:12px 0 0}
+
+  /* Плавные появления */
+  .reveal{opacity:0;transform:translateY(16px);transition:.6s ease}
+  .reveal.show{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- Аудио -->
+<audio id="bgMusic" src="music.mp3"></audio>
+
+<!-- Плавающий тоггл -->
+<div class="float-audio" id="floatAudio" style="display:none">
+  <button id="muteBtn" aria-label="Mute/Unmute">🔊</button>
+</div>
+
+<!-- Блок с фото + музыка -->
+<section class="reveal">
+  <div class="date-soft">30.08.2025</div>
+  <div class="names">Азамат &nbsp; Нaзім</div>
+  <div class="hero-photo">
+    <img src="jjj.jfif" alt="Жұптың фотосы">
+  </div>
+  
+ <!-- Музыка -->
+<audio id="bgMusic" preload="auto" loop>
+  <source src="Song1.mp3" type="audio/mpeg">
+</audio>
+
+<div class="circle-music">
+  <!-- кнопка play/pause -->
+  <button class="music-btn" id="playMusic">
+    <span class="icon">▶</span>
+  </button>
+
+  <!-- текст по окружности (внутренний круг) -->
+  <svg viewBox="0 0 200 200" class="circle-text">
+    <defs>
+      <path id="circlePathInner"
+            d="M 100, 100 m -60, 0 a 60,60 0 1,1 120,0 a 60,60 0 1,1 -120,0"/>
+    </defs>
+    <text>
+      <textPath href="#circlePathInner" startOffset="0%">
+        МУЗЫКАНЫ ҚОСУ • МУЗЫКАНЫ ҚОСУ • МУЗЫКАНЫ ҚОСУ •
+      </textPath>
+    </text>
+  </svg>
+</div>
+
+
+
+  <!-- 2. Цитата -->
+  <section class="reveal">
+    <p class="quote">«Ғашықтық – мәңгі тілек, жүрекке жұбаныш». <br>— Ж. Жұмабаев</p>
+  </section>
+
+  <!-- 3. Қонақтарға сөз -->
+  <section class="reveal intro">
+    <h3>құрметті қонақтар!</h3>
+    <p>
+      Сіздерді балаларымыз <b>Азамат</b> пен <b>Назімнің</b> ең бақытты күніне —
+      үйлену тойына шақырамыз. Ерекше күні қуанышымызды бірге бөлісіп,
+      ақ баталарыңызды беруге шақырамыз. Сіздердің жылы лебіздеріңіз біз үшін аса қымбат.
+    </p>
+  </section>
+
+  <!-- 4. Календарь -->
+  <section class="reveal">
+  <section class="calendar-section">
+    <div class="calendar-wrapper">
+      <div class="calendar-title">Тамыз</div>
+      <table>
+        <tr><td> </td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+        <tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
+        <tr><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td></tr>
+        <tr><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td></tr>
+        <tr><td>28</td><td>29</td><td class="wedding-date">30</td><td>31</td><td> </td><td> </td><td> </td></tr>
+      </table>
+<div class="calendar-title"><p>Той салтанаты 18:00-де басталады</p></div>
+    </div>
+  </section>
+</section>
+
+  <!-- 5. Адрес -->
+  <section class="reveal address">
+    <h3>мекен-жайымыз</h3>
+    <div class="hall">Grand Hall</div>
+    <div class="addr">Ақтөбе қаласы, Сәңкібай батыр көшесі, 261</div>
+    <div style="text-align:center">
+      <button class="map-btn" onclick="window.open('https://go.2gis.com/O9DPT')">
+         <b>Картаны ашу</b>
+      </button>
+    </div>
+  </section>
+
+  <!-- 6. Бағдарлама -->
+<section class="reveal">
+  <h2>Той бағдарламасы</h2>
+  <div class="timeline">
+    <div class="tl">
+      <div class="item"><span class="time">18:00</span>Қонақтардың жиналуы, фуршет</div>
+      <div class="item"><span class="time">19:00</span>Салтанатты бөлім</div>
+      <div class="item"><span class="time">20:00</span>Дастарқан, ойын-сауық</div>
+      <div class="item"><span class="time">22:00</span>Торт және қорытынды</div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- 7. Отсчёт -->
+<section class="reveal countdown">
+  <h3>Тойымызға дейін</h3>
+  <div class="dots">
+    <div class="dot">
+      <div class="number"><span id="cdDays">0</span></div>
+      <span>күн</span>
+    </div>
+    <div class="dot">
+      <div class="number"><span id="cdHours">00</span></div>
+      <span>сағат</span>
+    </div>
+    <div class="dot">
+      <div class="number"><span id="cdMinutes">00</span></div>
+      <span>минут</span>
+    </div>
+    <div class="dot">
+      <div class="number"><span id="cdSeconds">00</span></div>
+      <span>секунд</span>
+    </div>
+  </div>
+</section>
+
+
+  <!-- 8. Той иелері -->
+  <section class="reveal owners">
+    <h3>той иелері</h3>
+    <p>Азамат пен Нәзімнің ата-аналары сіздерді ақ ниетпен қарсы алады.</p>
+  </section>
+<div class="brand">@q.seziim</div>
+</main>
+
+<script>
+  /* ===== Scroll-reveal ===== */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }
+    });
+  }, {threshold:.16});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ===== Календарь: август 2025, выделить 30 ===== */
+  function renderCalendar(year, month, activeDay){
+    // month: 0-11
+    const grid = document.getElementById('calGrid');
+    grid.innerHTML = '';
+    const d = new Date(year, month, 1);
+    const startDay = (d.getDay() + 8) % 7; // сделать ПН=0
+    const daysInMonth = new Date(year, month+1, 0).getDate();
+
+    // заполним пустые клетки до 1-го
+    for(let i=0;i<startDay;i++){
+      const cell = document.createElement('div');
+      cell.className = 'day muted';
+      grid.appendChild(cell);
+    }
+    // дни месяца
+    for(let day=1; day<=daysInMonth; day++){
+      const cell = document.createElement('div');
+      cell.className = 'day';
+      if(day === activeDay) cell.classList.add('active');
+      cell.textContent = day;
+      grid.appendChild(cell);
+    }
+    // добиваем сетку до кратности 7
+    const rest = grid.children.length % 7;
+    if(rest !== 0){
+      for(let i=0;i<7-rest;i++){
+        const cell = document.createElement('div');
+        cell.className = 'day muted';
+        grid.appendChild(cell);
+      }
+    }
+  }
+  renderCalendar(2025, 7, 30); // август=8
+
+  /* ===== Музыка: кнопка под фото + плавающий тоггл ===== */
+const music = document.getElementById('bgMusic');
+const playBtn = document.getElementById('playMusic');
+const icon = playBtn.querySelector('.icon');
+
+playBtn.addEventListener('click', async () => {
+  if(music.paused){
+    try{
+      await music.play();
+      icon.textContent = '⏸'; // пауза
+    }catch(e){
+      alert('Қолмен қосу керек: жүйе бұғаттады.');
+    }
+  } else {
+    music.pause();
+    icon.textContent = '▶'; // play
+  }
+});
+
+
+muteBtn.addEventListener('click', ()=>{
+  music.muted = !music.muted;
+  setIcon();
+});
+
+
+// Цель: 30 августа 2025, 18:00 Актобе (UTC+5)
+const target = new Date('2025-08-30T18:00:00+05:00').getTime();
+
+function tick() {
+  const now = Date.now();
+  let diff = Math.max(0, target - now);
+
+  const d = Math.floor(diff / 86400000); diff -= d*86400000;
+  const h = Math.floor(diff / 3600000);  diff -= h*3600000;
+  const m = Math.floor(diff / 60000);    diff -= m*60000;
+  const s = Math.floor(diff / 1000);
+
+  updateNumber('cdDays', d);
+  updateNumber('cdHours', h.toString().padStart(2,'0'));
+  updateNumber('cdMinutes', m.toString().padStart(2,'0'));
+  updateNumber('cdSeconds', s.toString().padStart(2,'0'));
+}
+
+function updateNumber(id, value){
+  const el = document.getElementById(id);
+  if(el.textContent !== value){
+    el.style.transform = 'translateY(-100%)';
+    setTimeout(() => {
+      el.textContent = value;
+      el.style.transform = 'translateY(0)';
+    }, 150);
+  }
+}
+
+tick();
+setInterval(tick, 1000);
+
+
+</script>
+</body>
+</html>
