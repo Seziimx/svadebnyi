@@ -558,17 +558,18 @@ document.addEventListener('DOMContentLoaded', () => {
   playBtn.addEventListener('click', async () => {
     if (music.paused) {
       try {
-        await music.play();        // запускаем музыку
+        await music.play();        // запуск музыки
         icon.textContent = '⏸';   // меняем на паузу
       } catch(e) {
         alert('Қолмен қосу керек: жүйе бұғаттады.');
       }
     } else {
-      music.pause();               // ставим на паузу
-      icon.textContent = '▶';     // меняем обратно на ▶
+      music.pause();               // пауза
+      icon.textContent = '▶';     // возвращаем ▶
     }
   });
 });
+
 
 
 // Цель: 30 августа 2025, 18:00 Актобе (UTC+5)
