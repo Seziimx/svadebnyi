@@ -92,15 +92,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 32px;
+  font-size: 0; /* убираем влияние шрифта для SVG */
   color: #fff;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   z-index: 2;
 }
 
-/* Лёгкий сдвиг вверх-вправо (чуть больше) для точного центра */
-.music-btn .icon { display:inline-block; transform: translate(2px, -2px); }
+/* Иконки play/pause через SVG для единообразия на телефонах */
+.music-btn .icon { width: 28px; height: 28px; display: block; fill: #fff; }
+.music-btn .icon-pause { display: none; }
+.music-btn.playing .icon-play { display: none; }
+.music-btn.playing .icon-pause { display: block; }
 
 .circle-text {
   width: 200px;
@@ -374,7 +377,7 @@ td {
 
   /* Мелкая типографика */
   h2{font-size:22px;margin:0 0 12px;text-align:center}
-  .brand{color:var(--gold);font-weight:700;letter-spacing:.2em;text-align:center;margin:12px 0 0}
+  .brand{color:var(--gold);font-weight:700;letter-spacing:.2em;text-align:center;margin:12px 0 0;display:block}
 
   /* Плавные появления */
   .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease, transform .7s ease}
@@ -407,7 +410,15 @@ td {
 <div class="circle-music reveal-zoom">
   <!-- кнопка play/pause -->
   <button class="music-btn" id="playMusic">
-    <span class="icon">▶</span>
+    <!-- PLAY -->
+    <svg class="icon icon-play" viewBox="0 0 24 24" aria-hidden="true">
+      <polygon points="8,5 19,12 8,19" />
+    </svg>
+    <!-- PAUSE -->
+    <svg class="icon icon-pause" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="6" y="5" width="4" height="14" rx="1" />
+      <rect x="14" y="5" width="4" height="14" rx="1" />
+    </svg>
   </button>
 
   <!-- текст по окружности (внутренний круг) -->
@@ -513,7 +524,7 @@ td {
     <h3>той иелері</h3>
     <p>Азамат пен Нәзімнің ата-аналары сіздерді ақ ниетпен қарсы алады.</p>
   </section>
-<div class="brand">@q.seziim</div>
+<a class="brand" href="https://www.instagram.com/q.seziim?igsh=eWVvNmVjcnp3a2p4&utm_source=qr" target="_blank" rel="noopener">@q.seziim</a>
 </main>
 
 <script>
@@ -574,7 +585,6 @@ td {
 document.addEventListener('DOMContentLoaded', () => {
   const music = document.getElementById('bgMusic');
   const playBtn = document.getElementById('playMusic');
-  const icon = playBtn.querySelector('.icon');
   const START_AT = 20; // seconds
 
   // Установим стартовую позицию 00:20, когда будут известны метаданные
@@ -595,15 +605,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Перед запуском убедимся, что стартуем с 00:20
         setStartIfPossible();
         await music.play();        // запуск музыки
-        icon.textContent = '\u23F8';   // меняем на паузу
-        icon.style.transform = 'translate(1px, -2px)'; // пауза: слегка вправо и выше
+        playBtn.classList.add('playing');
       } catch(e) {
         alert('Қолмен қосу керек: жүйе бұғаттады.');
       }
     } else {
       music.pause();               // пауза
-      icon.textContent = '▶';     // возвращаем ▶
-      icon.style.transform = 'translate(2px, -2px)'; // треугольник: немного вправо и выше
+      playBtn.classList.remove('playing');
     }
   });
 });
