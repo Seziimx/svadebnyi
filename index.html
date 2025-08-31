@@ -381,6 +381,18 @@ td {
   text-align: center;
 }
 
+.owners::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+  border-radius: 8px;
+  z-index: -1; /* Чтобы он был позади текста */
+}
+
 .owners h3 {
   text-transform: uppercase;
   letter-spacing: .14em;
@@ -395,6 +407,7 @@ td {
   max-width: 360px;
   font-size: 16px;
   text-align: center;
+  color: white; /* Белый текст для читаемости */
 }
 
   /* Мелкая типографика */
@@ -690,6 +703,7 @@ setInterval(tick, 1000);
 </script>
 </body>
 </html>
+
 
 
 
