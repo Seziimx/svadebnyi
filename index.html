@@ -369,16 +369,28 @@ td {
 
 
 /* Той иелері */
+/* Той иелері */
 .owners {
   position: relative;
-  color: white; /* Для контраста текста на фоне */
-  padding: 40px;
+  color: white; /* Белый цвет текста */
+  padding: 100px 40px; /* Увеличиваем отступы для пространства */
   background-image: url('DSC07090.jpg');
-  background-size: cover;
+  background-size: cover; /* Оставляем cover для масштабирования */
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 8px;
+  border-radius: 20px;
   text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Легкая тень для контраста */
+  min-height: 400px; /* Минимальная высота для блока */
+  
+  /* Центрируем все содержимое */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  /* Анимация появления для всего блока */
+  animation: fadeInUp 1.5s ease-out;
 }
 
 .owners::before {
@@ -388,26 +400,49 @@ td {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
-  border-radius: 8px;
-  z-index: -1; /* Чтобы он был позади текста */
+  background: rgba(0, 0, 0, 0.4); /* Полупрозрачный черный фон */
+  border-radius: 20px; /* Синхронизируем с border-radius */
+  z-index: -1; /* Чтобы фон был позади текста */
 }
 
+/* Анимация для появления с эффектом подъема */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px); /* Начало анимации — текст немного снизу */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); /* В конце анимации текст в своем положении */
+  }
+}
+
+/* Заголовок с анимацией */
 .owners h3 {
   text-transform: uppercase;
   letter-spacing: .14em;
-  font-size: 14px;
-  color: #6a6864;
-  margin: 0 0 8px;
+  font-size: 30px; /* Увеличиваем размер шрифта для заголовка */
+  font-family: "Cormorant Garamond", serif;
+  color: #fff; /* Белый цвет для текста */
+  margin: 0 0 16px; /* Увеличиваем отступ снизу */
   text-align: center;
+  font-weight: bold; /* Жирное начертание для акцента */
+  
+  /* Добавляем анимацию для заголовка */
+  animation: fadeInUp 1.5s ease-out 0.3s; /* Задержка анимации для заголовка */
 }
 
 .owners p {
   margin: 0 auto;
-  max-width: 360px;
-  font-size: 16px;
+  max-width: 600px; /* Увеличиваем максимальную ширину текста */
+  font-size: 22px; /* Увеличиваем размер шрифта для лучшей читаемости */
+  font-family: "Cormorant Garamond", serif;
   text-align: center;
   color: white; /* Белый текст для читаемости */
+  line-height: 1.6; /* Межстрочный интервал для улучшенной читаемости */
+  
+  /* Анимация для параграфа */
+  animation: fadeInUp 1.5s ease-out 0.6s; /* Задержка анимации для параграфа */
 }
 
   /* Мелкая типографика */
@@ -512,7 +547,7 @@ td {
           <td>29</td><td>30</td><td> </td><td> </td><td> </td><td> </td><td> </td>
         </tr>
       </table>
-<div class="calendar-title"><p>Той салтанаты 18:00-де басталады</p></div>
+<div class="calendar-title"><p>Той салтанаты 17:00-де басталады</p></div>
     </div>
   </section>
 </section>
@@ -703,18 +738,3 @@ setInterval(tick, 1000);
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
