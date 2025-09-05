@@ -458,6 +458,21 @@ td {
   /* Вариант с лёгким увеличением */
   .reveal-zoom{transform:translateY(30px) scale(.96)}
   .reveal-zoom.show{transform:translateY(0) scale(1)}
+  
+  .insta-links {
+  text-align: center;   /* центрируем весь блок */
+  margin-top: 10px;     /* отступ сверху */
+  font-size: 18px;      /* чуть крупнее, чтобы выделялось */
+}
+
+.insta-links .brand {
+  color: #b08d57;          /* или другой цвет под дизайн */
+  text-decoration: none;
+}
+
+.insta-links .brand:hover {
+  text-decoration: underline; /* подсветка при наведении */
+}
 </style>
 </head>
 <body>
@@ -611,9 +626,13 @@ td {
     <h3>той иелері</h3>
     <p>Асылхан-Алтынгүл</p>
   </section>
-<a class="brand" href="https://www.instagram.com/the.rnr.kz?igsh=MThwYjA4djN1Mjdmcw==" target="_blank" rel="noopener">@the.rnr.kz</a>
- & 
-<a class="brand" href="https://www.instagram.com/q.seziim?igsh=eWVvNmVjcnp3a2p4&utm_source=qr" target="_blank" rel="noopener">@q.seziim</a>
+
+<div class="insta-links">
+  <a class="brand" href="https://www.instagram.com/the.rnr.kz?igsh=MThwYjA4djN1Mjdmcw==" target="_blank" rel="noopener">@the.rnr.kz</a>
+  &nbsp;&amp;&nbsp;
+  <a class="brand" href="https://www.instagram.com/q.seziim?igsh=eWVvNmVjcnp3a2p4&utm_source=qr" target="_blank" rel="noopener">@q.seziim</a>
+</div>
+
 </main>
 
 <script>
